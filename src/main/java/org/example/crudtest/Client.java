@@ -3,6 +3,8 @@ package org.example.crudtest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -26,9 +28,11 @@ public class Client {
     @Column(length = 20)
     private String status;
 
+    @CreationTimestamp
     @Column(nullable = false)
     private OffsetDateTime create_dttm;
 
+    @UpdateTimestamp
     @Column(nullable = false)
     private OffsetDateTime modify_dttm;
 

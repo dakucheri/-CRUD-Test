@@ -6,6 +6,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      time_zone: Europe/Moscow
+  Jackson:
+    time-zone: Europe/Moscow
 
 server:
   port: 8085
