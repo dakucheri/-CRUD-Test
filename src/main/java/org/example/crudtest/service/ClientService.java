@@ -1,6 +1,7 @@
 package org.example.crudtest.service;
 
 import org.example.crudtest.Client;
+import org.example.crudtest.exception.ClientNotFoundException;
 import org.example.crudtest.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class ClientService {
 
     public Client getById(Long id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new ClientNotFoundException("Client with id " + id + " not found"));
     }
 
     public Client create(Client client) {
@@ -35,7 +36,7 @@ public class ClientService {
 
     public Client update(Long id, Client updated) {
         Client existing = clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new ClientNotFoundException("Client with id " + id + " not found"));
 
         if (updated.getFull_name() != null) {
             existing.setFull_name(updated.getFull_name());
@@ -52,7 +53,7 @@ public class ClientService {
 
     public void delete(Long id) {
         if (!clientRepository.existsById(id)) {
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException("Client with id " + id + " not found");
         }
         clientRepository.deleteById(id);
     }
