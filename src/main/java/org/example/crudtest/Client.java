@@ -22,6 +22,7 @@ public class Client {
     @Column(length = 1)
     private String gender;
 
+    @JsonProperty("status")
     @Column(length = 20)
     private String status;
 

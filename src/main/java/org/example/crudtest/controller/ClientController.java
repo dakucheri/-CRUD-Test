@@ -18,7 +18,7 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAll() {
-        return ResponseEntity.ok(clientService.getAll());
+        return ResponseEntity.ok(clientService.getAllSortedById());
     }
 
     @GetMapping("/{id}")

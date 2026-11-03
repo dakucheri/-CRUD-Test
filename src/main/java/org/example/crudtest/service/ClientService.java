@@ -2,7 +2,6 @@ package org.example.crudtest.service;
 
 import org.example.crudtest.Client;
 import org.example.crudtest.repository.ClientRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +15,12 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> getAll() {
-        return clientRepository.findAll();
+//    public List<Client> getAll() {
+//        return clientRepository.findAll();
+//    }
+
+    public List<Client> getAllSortedById() {
+        return clientRepository.findAllSortedById();
     }
 
     public Client getById(Long id) {
@@ -34,8 +37,15 @@ public class ClientService {
         Client existing = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
 
-        if (updated.getFull_name() != null) existing.setFull_name(updated.getFull_name());
-        if (updated.getGender() != null) existing.setGender(updated.getGender());
+        if (updated.getFull_name() != null) {
+            existing.setFull_name(updated.getFull_name());
+        }
+        if (updated.getGender() != null) {
+            existing.setGender(updated.getGender());
+        }
+        if (updated.getStatus() != null) {
+            existing.setStatus(updated.getStatus());
+        }
 
         return clientRepository.save(existing);
     }
